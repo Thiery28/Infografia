@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Diseño de Software y Mejores Prácticas</title>
+    <style>
+        /* Variables de colores */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --info: #17a2b8;
+            --gray: #95a5a6;
+        }
+
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 5px solid var(--accent);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Tarjetas */
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header i {
+            margin-right: 10px;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Grid layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+
+        /* Listas */
+        .practice-list {
+            list-style-type: none;
+        }
+
+        .practice-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .practice-list li:last-child {
+            border-bottom: none;
+        }
+
+        .practice-list li::before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .badge-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .badge-secondary {
+            background-color: var(--gray);
+            color: white;
+        }
+
+        .badge-accent {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        /* Acordeón */
+        .accordion {
+            margin-bottom: 1rem;
+        }
+
+        .accordion-header {
+            background-color: var(--light);
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .accordion-header:hover {
+            background-color: #dfe6e9;
+        }
+
+        .accordion-content {
+            padding: 1rem;
+            background-color: white;
+            border-radius: 0 0 4px 4px;
+            display: none;
+        }
+
+        .accordion-content.active {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .card-header {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Iconos */
+        .icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            text-align: center;
+            line-height: 24px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        /* Colores temáticos para secciones */
+        .design { border-left: 5px solid var(--secondary); }
+        .methodologies { border-left: 5px solid var(--success); }
+        .coding { border-left: 5px solid var(--warning); }
+        .testing { border-left: 5px solid var(--info); }
+        .delivery { border-left: 5px solid var(--accent); }
+        .infrastructure { border-left: 5px solid #9b59b6; }
+        .security { border-left: 5px solid #e67e22; }
+        .patterns { border-left: 5px solid #1abc9c; }
+        .microservices { border-left: 5px solid #d35400; }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            margin-right: 0.5rem;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Diseño de Software y Mejores Prácticas</h1>
+            <p>Guía completa basada en principios de ingeniería de software</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="card">
+            <div class="card-header">
+                <span class="icon">📋</span> Definición de Diseño de Software
+            </div>
+            <div class="card-body">
+                <p>El diseño de software es una etapa fundamental en el proceso de desarrollo que utiliza técnicas y principios para bosquejar la estructura de los componentes de un <strong>software con suficiente detalle para permitir su interpretación y construcción</strong>.</p>
+                
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Características clave del diseño de software</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <ul class="practice-list">
+                            <li>Basado en requerimientos del software y su análisis</li>
+                            <li>Considera aspectos como escalabilidad, seguridad, rendimiento y mantenibilidad</li>
+                            <li>Puede incluir bases de datos, comunicación con otros componentes y sistemas distribuidos</li>
+                            <li>En diseño orientado a objetos: identifica clases, atributos, comportamientos y relaciones</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <span class="icon">⭐</span> Definición de Mejores Prácticas
+            </div>
+            <div class="card-body">
+                <p>Las mejores prácticas son pautas que sugieren actividades, procesos y comportamientos para obtener los mejores resultados en un área de negocio determinada.</p>
+                <p>En programación, son costumbres y decisiones que buscan mejorar la <strong>agilidad, legibilidad, mantenimiento y escalabilidad</strong> de los proyectos.</p>
+            </div>
+        </section>
+
+        <h2 style="margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 2px solid var(--secondary);">Mejores Prácticas de Desarrollo</h2>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="methodologies">Metodologías</div>
+            <div class="tab" data-tab="coding">Codificación</div>
+            <div class="tab" data-tab="testing">Pruebas</div>
+            <div class="tab" data-tab="delivery">Entrega</div>
+            <div class="tab" data-tab="security">Seguridad</div>
+            <div class="tab" data-tab="patterns">Patrones</div>
+        </div>
+
+        <div class="tab-content active" id="methodologies">
+            <div class="grid">
+                <div class="card methodologies">
+                    <div class="card-header">
+                        <span class="icon">🔄</span> Metodologías de Desarrollo
+                    </div>
+                    <div class="card-body">
+                        <ul class="practice-list">
+                            <li><strong>Scrum:</strong> Marco de prácticas que mejora calidad, velocidad y viabilidad financiera</li>
+                            <li><strong>Nexus:</strong> Escala equipos de Scrum para proyectos grandes con lanzamientos incrementales</li>
+                            <li><strong>Kanban:</strong> Visualiza el trabajo necesario y prioriza tareas para completarlas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="coding">
+            <div class="grid">
+                <div class="card coding">
+                    <div class="card-header">
+                        <span class="icon">💻</span> Mejores Prácticas de Codificación
+                    </div>
+                    <div class="card-body">
+                        <ul class="practice-list">
+                            <li><strong>Legibilidad y código limpio:</strong> Característica de alta calidad que evita errores</li>
+                            <li><strong>Refactorización frecuente:</strong> Reestructurar código para hacerlo más comprensible y mantenible</li>
+                            <li><strong>Reducción de deuda técnica:</strong> Evitar atajos que comprometan la calidad a largo plazo</li>
+                            <li><strong>Principios KISS, YAGNI, DRY y SOLID</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card coding">
+                    <div class="card-header">
+                        <span class="icon">🔤</span> Principios de Codificación
+                    </div>
+                    <div class="card-body">
+                        <ul class="practice-list">
+                            <li><span class="badge badge-primary">KISS</span> Keep It Simple, Stupid!: Evaluar soluciones simples a problemas complejos</li>
+                            <li><span class="badge badge-primary">YAGNI</span> You Ain't Gonna Need It: Evitar añadir funcionalidades para requisitos futuros innecesarios</li>
+                            <li><span class="badge badge-primary">DRY</span> Don't Repeat Yourself: Evitar código duplicado, difícil y costoso de mantener</li>
+                            <li><span class="badge badge-primary">SOLID</span> Principios de diseño orientado a objetos para código legible, mantenible y escalable</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="testing">
+            <div class="grid">
+                <div class="card testing">
+                    <div class="card-header">
+                        <span class="icon">🧪</span> Mejores Prácticas de Pruebas
+                    </div>
+                    <div class="card-body">
+                        <ul class="practice-list">
+                            <li><strong>Pruebas unitarias:</strong> Práctica número uno para construir software, expone problemas temprano</li>
+                            <li><strong>BDD (Desarrollo impulsado por comportamiento):</strong> Se centra en comportamiento y expectativas de usuarios</li>
+                            <li><strong>Pruebas de aceptación automatizadas:</strong> Parte integral de la estrategia de entrega continua</li>
+                            <li><strong>Pruebas de rendimiento:</strong> Evalúan carga y tiempo de respuesta</li>
+                            <li><strong>TDD (Desarrollo basado en pruebas):</strong> Mejora calidad y tiempo de comercialización</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="delivery">
+            <div class="grid">
+                <div class="card delivery">
+                    <div class="card-header">
+                        <span class="icon">🚚</span> Entrega Continua
+                    </div>
+                    <div class="card-body">
+                        <ul class="practice-list">
+                            <li><strong>CI/CD (Integración Continua/Despliegue Continuo):</strong> Integrar e implementar cambios frecuentemente</li>
+                            <li><strong>Arquitectura (Microservicios/Monolitos):</strong> Microservicios para flexibilidad, monolitos para aplicaciones simples</li>
+                            <li><strong>DevOps:</strong> Fusiona desarrollo y operaciones para entregar software más rápido</li>
+                            <li><strong>Monitoreo y Registro:</strong> Fundamental para identificar errores en entornos controlados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card infrastructure">
+                    <div class="card-header">
+                        <span class="icon">🛠️</span> Infraestructura y Automatización
+                    </div>
+                    <div class="card-body">
+                        <ul class="practice-list">
+                            <li><strong>Infraestructura como código (IaC):</strong> Crear, administrar y modificar infraestructura usando código</li>
+                            <li><strong>Gestión de configuración:</strong> Configurar servidores, aplicaciones e infraestructura como código</li>
+                            <li><strong>Computación en la nube:</strong> Familiarizarse con AWS, Azure, Google Cloud y otras soluciones</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="security">
+            <div class="grid">
+                <div class="card security">
+                    <div class="card-header">
+                        <span class="icon">🔒</span> Seguridad del Software
+                    </div>
+                    <div class="card-body">
+                        <ul class="practice-list">
+                            <li><strong>DevSecOps:</strong> Crear, entregar y monitorear continuamente software seguro</li>
+                            <li><strong>Pruebas de penetración:</strong> Probar vulnerabilidades en software y hardware</li>
+                            <li><strong>Mantener software actualizado:</strong> Aplicar parches de seguridad y actualizaciones</li>
+                            <li><strong>Medidas de seguridad en capas:</strong> Firewalls, detección de intrusiones y antivirus</li>
+                            <li><strong>Capacitación de usuarios:</strong> Educar en prácticas de seguridad</li>
+                            <li><strong>Pruebas de seguridad regulares:</strong> Identificar y corregir vulnerabilidades</li>
+                            <li><strong>Políticas de seguridad robustas:</strong> Autenticación de dos factores, cifrado de datos</li>
+                            <li><strong>Monitoreo y respuesta ante incidentes:</strong> Monitorear continuamente sistemas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="patterns">
+            <div class="grid">
+                <div class="card patterns">
+                    <div class="card-header">
+                        <span class="icon">🏗️</span> Patrones de Diseño
+                    </div>
+                    <div class="card-body">
+                        <ul class="practice-list">
+                            <li><strong>MVC (Model-View-Controller):</strong> Separa preocupaciones en Modelo, Vista y Controlador</li>
+                            <li><strong>CQRS (Command Query Responsibility Segregation):</strong> Separa operaciones de lectura y escritura</li>
+                            <li><strong>Arquitectura dirigida por eventos:</strong> Comunicación entre componentes a través de eventos</li>
+                            <li><strong>Patrón de Repositorio:</strong> Abstracción sobre la capa de acceso a datos</li>
+                            <li><strong>API Gateway:</strong> Punto de entrada único en microservicios</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card microservices">
+                    <div class="card-header">
+                        <span class="icon">🔩</span> Mejores Prácticas de Microservicios
+                    </div>
+                    <div class="card-body">
+                        <ul class="practice-list">
+                            <li><strong>Almacén de datos independiente:</strong> Cada microservicio con su propia base de datos</li>
+                            <li><strong>Código en nivel similar de madurez:</strong> Mantener servicios alineados en versiones</li>
+                            <li><strong>Construcción separada:</strong> Cada microservicio se construye y despliega independientemente</li>
+                            <li><strong>Responsabilidad Individual (SRP):</strong> Un microservicio, una responsabilidad específica</li>
+                            <li><strong>Despliegue en contenedores:</strong> Empaquetar con dependencias en contenedores</li>
+                            <li><strong>Servidores sin estado:</strong> El estado debe manejarse externamente</li>
+                            <li><strong>Diseño Basado en el Dominio (DDD):</strong> Estructurar servicios alrededor de áreas de negocio</li>
+                            <li><strong>Micro Frontend:</strong> Aplicar principios de microservicios al frontend</li>
+                            <li><strong>Orquestación:</strong> Gestionar, coordinar y automatizar el despliegue</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="card">
+            <div class="card-header">
+                <span class="icon">📢</span> Comunicación y Colaboración
+            </div>
+            <div class="card-body">
+                <p><strong>Desarrollar la comunicación efectiva y los grupos autoorganizados:</strong> Crucial para un enfoque ágil, asegurando comunicación efectiva entre miembros del equipo y la organización.</p>
+                <p>Establecer canales de comunicación y colaboración ayuda a trabajar juntos, comprender y resolver problemas, y avanzar hacia grupos autoorganizados con supervisión mínima.</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <span class="icon">📚</span> Referencias IEEE
+            </div>
+            <div class="card-body">
+                <p>Tras revisar cuidadosamente todas las fuentes, <strong>no se encontró ninguna mención directa o referencia a estándares o publicaciones del IEEE</strong> (Institute of Electrical and Electronics Engineers) en relación con las definiciones de "diseño de software" o "mejores prácticas", ni en la descripción de los principios o metodologías.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Infografía sobre Diseño de Software y Mejores Prácticas - Basado en el documento proporcionado</p>
+        </div>
+    </footer>
+
+    <script>
+        // Funcionalidad para acordeones
+        document.querySelectorAll('.accordion-header').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                content.classList.toggle('active');
+                
+                // Cambiar icono
+                const icon = button.querySelector('span:last-child');
+                icon.textContent = content.classList.contains('active') ? '▲' : '▼';
+            });
+        });
+
+        // Funcionalidad para pestañas
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remover clase active de todas las pestañas y contenidos
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Agregar clase active a la pestaña clickeada
+                tab.classList.add('active');
+                
+                // Mostrar el contenido correspondiente
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
